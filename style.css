@@ -1,0 +1,275 @@
+/* --- 1. GLOBAL & PRELOADER --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: #fdfdfd; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; width: 100%; }
+
+#loader {
+    position: fixed; width: 100%; height: 100vh; background: #ffffff;
+    z-index: 9999; display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+.loader-content { text-align: center; animation: pulse 1.5s infinite; }
+.loader-dot { display: block; width: 15px; height: 15px; background: #007AFF; border-radius: 50%; margin: 0 auto 15px; }
+@keyframes pulse { 0%, 100% { transform: scale(0.9); opacity: 0.5; } 50% { transform: scale(1); opacity: 1; } }
+
+/* --- 2. FLOATING NAVIGATION --- */
+header { width: 100%; position: fixed; top: 15px; left: 0; z-index: 1000; transition: 0.4s; }
+header.scrolled { top: 0; }
+header.scrolled nav { width: 100%; border-radius: 0; background: rgba(255, 255, 255, 0.98); }
+
+nav {
+    width: 92%; max-width: 1200px; margin: 0 auto; background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px); padding: 12px 25px; border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+.nav-container { display: flex; justify-content: space-between; align-items: center; }
+.nav-logo { font-weight: 800; display: flex; align-items: center; gap: 8px; font-size: 1rem; color: #1a1a1a; }
+.dot { width: 8px; height: 8px; background: #007AFF; border-radius: 50%; }
+.nav-links { display: flex; gap: 15px; list-style: none; }
+.nav-links a { text-decoration: none; color: #111; font-weight: 700; font-size: 0.7rem; text-transform: uppercase; }
+
+/* --- 3. HERO SECTION (DESKTOP) --- */
+.hero-wrapper {
+    position: relative; width: 100%; min-height: 100vh; display: flex;
+    align-items: center; justify-content: space-between; padding: 0 10%; overflow: hidden;
+}
+.hero-bg-image {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+    background: #000;
+}
+.hero-bg-image img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center; /* Centered for Desktop */
+    filter: brightness(0.65) blur(1px); position: absolute;
+}
+
+.brand-heading { 
+    color: #ffffff; font-size: clamp(3rem, 8vw, 6rem); 
+    font-weight: 900; line-height: 0.85; text-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+}
+.brand-heading span { color: #3399FF; display: block; }
+
+.glass-card {
+    background: rgba(0, 0, 0, 0.55); backdrop-filter: blur(25px);
+    padding: 35px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.15);
+    max-width: 420px; color: white; box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+}
+.btn-whatsapp {
+    display: inline-block; background: #111; color: #fff; padding: 14px 28px;
+    text-decoration: none; border-radius: 12px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; width: 100%; text-align: center;
+}
+.btn-whatsapp:hover { background: #007AFF; transform: translateY(-3px); }
+
+/* --- 4. SERVICES & GALLERY --- */
+.services-section, .gallery-section { padding: 80px 8%; text-align: center; }
+.section-title { font-size: 2.5rem; margin-bottom: 50px; font-weight: 800; }
+.services-container { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; }
+.service-card { background: #fcfcfc; padding: 40px 25px; border-radius: 20px; flex: 1; min-width: 280px; border: 1px solid #eee; }
+.gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.photo-box { height: 350px; border-radius: 25px; overflow: hidden; position: relative; }
+.photo-box img { width: 100%; height: 100%; object-fit: cover; }
+
+/* --- 5. ANIMATIONS --- */
+.reveal { opacity: 0; transform: translateY(30px); transition: 1s ease; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* --- 6. THE MOBILE FIX (CRITICAL) --- */
+@media (max-width: 768px) {
+    .hero-wrapper { 
+        flex-direction: column; 
+        text-align: center; 
+        justify-content: center; 
+        padding-top: 120px; 
+    }
+
+    /* THIS SLIDES THE PHOTO TO THE LEFT SO THE PHOTOGRAPHER IS CENTERED ON PHONES */
+    .hero-bg-image img { 
+        object-position: 78% center !important; 
+        filter: brightness(0.6);
+    }
+
+    .brand-heading { 
+        font-size: 2.8rem !important; 
+        margin-bottom: 25px; 
+        padding: 0 10px;
+    }
+
+    .glass-card { 
+        max-width: 100%; 
+        padding: 25px; 
+        margin-top: 20px;
+        background: rgba(0, 0, 0, 0.65); /* Slightly darker for mobile readability */
+    }
+
+    .nav-links { gap: 10px; }
+    .nav-links a { font-size: 0.6rem; }
+    .gallery-grid { grid-template-columns: 1fr; }
+}
+/* --- 7. PRICING SECTION STYLES --- */
+.pricing-section { 
+    padding: 100px 8%; 
+    background: #ffffff; 
+    text-align: center; 
+}
+
+.pricing-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.price-card {
+    background: #ffffff;
+    padding: 50px 30px;
+    border-radius: 30px;
+    flex: 1;
+    min-width: 300px;
+    max-width: 360px;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    border: 1px solid #eee;
+}
+
+.package-emoji { font-size: 3rem; margin-bottom: 15px; }
+
+/* Glow Effects on Hover */
+.silver-glow:hover { border-color: #c0c0c0; box-shadow: 0 15px 40px rgba(192, 192, 192, 0.3); transform: translateY(-10px); }
+.gold-glow:hover { border-color: #ffd700; box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4); transform: translateY(-10px); }
+.platinum-glow:hover { border-color: #007AFF; box-shadow: 0 15px 40px rgba(0, 122, 255, 0.3); transform: translateY(-10px); }
+
+.price-card.featured {
+    border: 2px solid #ffd700;
+    transform: scale(1.05);
+}
+
+.popular-tag {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffd700;
+    color: #000;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.price-header h3 { font-size: 1.8rem; margin-bottom: 5px; color: #111; }
+.amount { font-size: 2.2rem; font-weight: 900; color: #111; margin-bottom: 30px; }
+
+.price-features { list-style: none; margin-bottom: 35px; text-align: left; }
+.price-features li {
+    padding: 12px 0;
+    border-bottom: 1px solid #f4f4f4;
+    font-size: 0.95rem;
+    color: #444;
+}
+.bonus-feature { color: #007AFF !important; font-weight: 700; }
+
+.btn-price {
+    display: block;
+    background: #111;
+    color: white;
+    padding: 16px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.btn-price:hover { background: #007AFF; }
+
+/* Mobile logic */
+@media (max-width: 768px) {
+    .price-card.featured { transform: scale(1); margin: 20px 0; }
+    .pricing-container { padding: 0 10px; }
+}
+/* --- 8. PROFESSIONAL FOOTER --- */
+.main-footer {
+    background: #0f0f0f;
+    color: white;
+    padding: 80px 8% 30px;
+    border-top: 1px solid #222;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-brand { flex: 2; min-width: 280px; }
+.footer-brand p { color: #888; line-height: 1.6; margin-top: 10px; max-width: 350px; }
+
+.footer-nav, .footer-social { flex: 1; min-width: 150px; }
+
+.footer-nav h4, .footer-social h4 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+.footer-nav ul { list-style: none; }
+.footer-nav li { margin-bottom: 12px; }
+.footer-nav a { color: #888; text-decoration: none; transition: 0.3s; }
+.footer-nav a:hover { color: #007AFF; padding-left: 5px; }
+
+/* Social Icons Styling */
+.social-icons { display: flex; gap: 15px; }
+.social-icons a {
+    width: 45px;
+    height: 45px;
+    background: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    color: white;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: 0.4s;
+    border: 1px solid #333;
+}
+
+/* Brand specific colors on hover */
+.icon-fb:hover { background: #3b5998; border-color: #3b5998; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(59, 89, 152, 0.3); }
+.icon-ig:hover { background: #e1306c; border-color: #e1306c; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(225, 48, 108, 0.3); }
+.icon-wa:hover { background: #25d366; border-color: #25d366; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
+
+/* Bottom Bar */
+.footer-bottom {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid #1a1a1a;
+    text-align: center;
+}
+
+.footer-bottom p { color: #555; font-size: 0.85rem; margin-bottom: 10px; }
+.developer { font-size: 0.75rem !important; letter-spacing: 1px; }
+.developer a { 
+    color: #007AFF; 
+    text-decoration: none; 
+    font-weight: 800; 
+    transition: 0.3s;
+}
+.developer a:hover { text-decoration: underline; color: #fff; }
+
+@media (max-width: 768px) {
+    .main-footer { text-align: center; padding-top: 60px; }
+    .footer-brand p { margin: 10px auto; }
+    .social-icons { justify-content: center; }
+}
